@@ -13,28 +13,28 @@ default: &default
 
 development:
   <<: *default
-  username: <%= ENV["DATABASE_USERNAME"] %>
-  password: <%= ENV["DATABASE_PASSWORD"] %>
-  host: <%= ENV["DATABASE_DATABASE_HOST"] %>
-  database: <%= ENV["DATABASE_DATABASE_NAME"] %>
+  username: <%= ENV["DEVELOPMENT_DATABASE_USERNAME"] %>
+  password: <%= ENV["DEVELOPMENT_DATABASE_PASSWORD"] %>
+  host: <%= ENV["DEVELOPMENT_DATABASE_HOST"] %>
+  database: <%= ENV["DEVELOPMENT_DATABASE_NAME"] %>
 
 test:
   <<: *default
-  username: <%= ENV["DATABASE_USERNAME"] %>
-  password: <%= ENV["DATABASE_PASSWORD"] %>
-  host: <%= ENV["DATABASE_DATABASE_HOST"] %>
-  database: DATABASE_admin_test
+  username: <%= ENV["TEST_DATABASE_USERNAME"] %>
+  password: <%= ENV["TEST_DATABASE_PASSWORD"] %>
+  host: <%= ENV["TEST_DATABASE_HOST"] %>
+  database: <%= ENV["TEST_DATABASE_NAME"] %>
 
 staging:
   <<: *default
-  username: <%= ENV["DATABASE_USERNAME"] %>
-  password: <%= ENV["DATABASE_PASSWORD"] %>
-  host: <%= ENV["DATABASE_DATABASE_HOST"] %>
-  database: <%= ENV["DATABASE_DATABASE_NAME"] %>
+  username: <%= ENV["STAGING_DATABASE_USERNAME"] %>
+  password: <%= ENV["STAGING_DATABASE_PASSWORD"] %>
+  host: <%= ENV["STAGING_DATABASE_HOST"] %>
+  database: <%= ENV["STAGING_DATABASE_NAME"] %>
 
 production:
   <<: *default
-  username: <%= ENV["DATABASE_USERNAME"] %>
-  password: <%= ENV["DATABASE_PASSWORD"] %>
-  host: <%= ENV["DATABASE_DATABASE_HOST"] %>
-  database: <%= ENV["DATABASE_DATABASE_NAME"] %>
+  username: <%= ENV["PRODUCTION_DATABASE_USERNAME"] %>
+  password: <%= ENV["PRODUCTION_DATABASE_PASSWORD"] %>
+  host: <%= ENV["PRODUCTION_DATABASE_HOST"] %>
+  database: <%= ENV["PRODUCTION_DATABASE_NAME"] %>
