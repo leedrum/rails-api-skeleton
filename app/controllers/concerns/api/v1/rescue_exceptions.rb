@@ -27,8 +27,7 @@ module Api
         rescue_from Api::Error::UnauthorizedRequest, with: :render_unauthorized_reponse
         rescue_from Api::Error::InvalidRecaptcha, with: :render_invalid_recaptcha_reponse
         rescue_from(
-          Pagy::OverflowError,
-          Aws::S3::Errors,
+          # Aws::S3::Errors,
           ActiveRecord::ValueTooLong,
           with: :render_service_unavailable_error_response
         )
