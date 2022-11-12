@@ -5,6 +5,7 @@ module Api
     attr_reader :code, :message
 
     def initialize code: nil, message: nil
+      super
       @code = code
       @message = message
     end
@@ -25,18 +26,16 @@ module Api
     attr_reader :type, :file_path, :i18n_scope
 
     def initialize type, error_detail
+      super
       @type = type
       @file_path = caller(0, 3).last.match(file_path_regex)[0]
-      @i18n_scope = get_i18n_scope
+      @i18n_scope = file_path.split(%r{/})[3..].map {|e| e.gsub file_suffix, ""}
       error = I18n.t error_detail, scope: i18n_scope
       @code = error[:code]
       @message = error[:message]
     end
 
     private
-    def get_i18n_scope
-      file_path.split(%r{/})[3..].map {|e| e.gsub file_suffix, ""}
-    end
 
     def file_path_regex
       case type
@@ -65,18 +64,21 @@ module Api
     # TODO: define custom error class (extends the BaseError) here.
     class ServiceExecuteFailed < ExecuteFailed
       def initialize error_detail
+        super
         super :service, error_detail
       end
     end
 
     class FormExecuteFailed < ExecuteFailed
       def initialize error_detail
+        super
         super :form, error_detail
       end
     end
 
     class ControllerRuntimeError < ExecuteFailed
       def initialize error_detail
+        super
         super :controller, error_detail
       end
     end
@@ -85,6 +87,7 @@ module Api
       attr_reader :error
 
       def initialize error
+        super
         @error = error
       end
 
@@ -97,6 +100,7 @@ module Api
       attr_reader :error
 
       def initialize error
+        super
         @error = error
       end
 
@@ -109,6 +113,7 @@ module Api
       attr_reader :error
 
       def initialize error = nil
+        super
         @error = error
       end
 
@@ -121,6 +126,7 @@ module Api
       attr_reader :error
 
       def initialize error = nil
+        super
         error = I18n.t error
         @code = error[:code]
         @message = error[:message]

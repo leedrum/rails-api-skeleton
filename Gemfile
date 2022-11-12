@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+git_source(:github) {|repo| "https://github.com/#{repo}.git"}
 
 ruby "3.1.2"
 
-gem "rails", "~> 7.0.4"
-gem "mysql2"
-gem "puma", "~> 5.0"
 gem "figaro"
 gem "jwt"
+gem "mysql2"
+gem "puma", "~> 5.0"
+gem "rails", "~> 7.0.4"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
@@ -21,7 +23,7 @@ gem "jwt"
 # gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+gem "tzinfo-data", platforms: %i(mingw mswin x64_mingw jruby)
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
@@ -34,10 +36,11 @@ gem "bootsnap", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
-  gem "rspec-rails"
+  gem "debug", platforms: %i(mri mingw x64_mingw)
   gem "factory_bot_rails"
   gem "faker"
+  gem "pry"
+  gem "rspec-rails"
 end
 
 group :development do
