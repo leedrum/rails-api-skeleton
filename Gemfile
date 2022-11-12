@@ -42,6 +42,7 @@ group :development, :test do
   gem "pry"
   gem "rspec-rails"
   gem "rubocop", require: false
+  gem "bundler-audit", require: false
 end
 
 group :development do
