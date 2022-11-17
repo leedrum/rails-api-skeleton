@@ -5,7 +5,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      devise_for :users
+      mount_devise_token_auth_for "User", at: "users"
+        as :user do
+          # Define routes for User within this block.
+        end
     end
   end
 end
