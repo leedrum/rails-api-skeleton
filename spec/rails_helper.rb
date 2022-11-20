@@ -7,6 +7,16 @@ require_relative '../config/environment'
 # Prevent database truncation if the environment is production
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
+if ENV['RAILS_ENV'] == 'test'
+  require 'simplecov'
+  require 'simplecov_json_formatter'
+  SimpleCov.start do
+    enable_coverage :branch
+  end
+  SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
+  SimpleCov.add_filter 'lib/api/error.rb'
+  SimpleCov.add_filter 'app/controllers/concerns/api/v1/rescue_exceptions.rb'
+end
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
