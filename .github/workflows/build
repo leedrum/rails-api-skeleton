@@ -1,7 +1,9 @@
-name: "CI"
+name: "Build"
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -33,3 +35,14 @@ jobs:
         run: bin/bundle exec rubocop --parallel
       - name: Run Rspec
         run: bin/rake
+      - name: Setup Code Climate test-reporter
+        run: |
+          curl -sSL -o /usr/local/bin/cc-test-reporter https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+          chmod +x /usr/local/bin/cc-test-reporter
+      - name: Code Climate Test Coverage
+        shell: bash
+        run: |
+          /usr/local/bin/cc-test-reporter before-build
+          /usr/local/bin/cc-test-reporter format-coverage format-coverage coverage/coverage.json -t simplecov -o coverage/codeclimate.json
+          /usr/local/bin/cc-test-reporter sum-coverage coverage/codeclimate.json
+          /usr/local/bin/cc-test-reporter upload-coverage -r dea43a9f2f276458fedcb27725bb965da6ec78e1e1d65b6e22e2a0c986b6d44a
