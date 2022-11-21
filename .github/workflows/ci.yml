@@ -1,4 +1,4 @@
-name: "CI"
+name: "CI Verify"
 on:
   push:
     branches: [ "dev" ]
@@ -24,12 +24,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@0a29871fe2b0200a17a4497bae54fe5df0d973aa # v1.115.3
+        uses: ruby/setup-ruby@v1.123.0
         with:
           bundler-cache: true
       - name: Security audit dependencies
-        run: bin/bundle exec bundler-audit --update
+        run: |
+          bin/bundle exec bundler-audit --update
+          bin/bundle exec brakeman -q -w2
       - name: Lint Ruby files
         run: bin/bundle exec rubocop --parallel
       - name: Run Rspec
-        run: bin/rake
+        run: bin/bundle exec rspec
